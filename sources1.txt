@@ -1,0 +1,7 @@
+pcreg.v
+gpr.v
+memory.v
+control_logic.v
+alu.v
+writeback.v
+top_connecter.v
