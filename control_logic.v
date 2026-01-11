@@ -1,5 +1,5 @@
 //Control logic of the instruction
-module control(input [31:0]inst, output [6:0]wInstype, output wA_sel, output wB_sel, output [3:0]wAlu_op, output wMem_read_en, output wMem_write_en, output wReg_write_en, output [2:0]wWb_sel, output [1:0]wPc_sel, output [2:0]wBr_cond, output [2:0]wStore_width, output [2:0]wLoad_width);
+module control(input [31:0]inst, output [6:0]wInstype, output wA_sel, output wB_sel, output [9:0]wAlu_op, output wMem_read_en, output wMem_write_en, output wReg_write_en, output [2:0]wWb_sel, output [1:0]wPc_sel, output [2:0]wBr_cond, output [2:0]wStore_width, output [2:0]wLoad_width);
 //TYPES
 localparam REGISTER_TYPE = 7'b0110011;
 localparam IMMEDIATE_TYPE = 7'b0010011;
@@ -68,7 +68,7 @@ localparam PC_ALU = 2'd0;
 
 reg [1:0]a_sel; 
 reg [1:0]b_sel;
-reg [3:0]alu_op;
+reg [9:0]alu_op;
 reg [1:0]mem_read_en;
 reg [1:0]mem_write_en;
 reg [1:0]reg_write_en;
@@ -212,7 +212,7 @@ always @(*) begin
 
     end
     BRANCH_TYPE:    begin     //OPCODE-BRANCH
-    a_sel = A_SEL_RS1;
+    a_sel = A_SEL_PC;   
     b_sel = B_SEL_IMM;
     alu_op = ALU_ADD;
     mem_read_en = MEM_READ_DIS;
@@ -247,9 +247,9 @@ always @(*) begin
     alu_op = ALU_ADD;
     mem_read_en = MEM_READ_DIS;
     mem_write_en = MEM_WRITE_DIS;
-    reg_write_en = REG_WRITE_DIS;
-    wb_sel = WB_ALU; 
-    pc_sel = 1; //pc+4 or alu dependent on if br cond true or not, so doesn't matter at the moment
+    reg_write_en = REG_WRITE_EN;
+    wb_sel = WB_PC_PLUS_4; 
+    pc_sel = PC_ALU; 
     insType = J_TYPE;
 
     end

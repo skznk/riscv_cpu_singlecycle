@@ -1,6 +1,6 @@
 // ALU COMPONENT
 
-module alu(input signed [63:0]a, input signed [63:0]b, input [3:0]alu_op, output reg [63:0]alu_result);
+module alu(input signed [63:0]a, input signed [63:0]b, input [9:0]alu_op, output reg [63:0]alu_result);
 
 //Different ALU operations
 localparam ALU_AND = 10'd7;
@@ -93,9 +93,9 @@ always@(*) begin //Determines the conditional and evaluates
     BR_NEQ: 
     take = (rs1==rs2) ? 0:1;
     BR_LT: 
-    take = (rs1 < rs2) ? 1:0;
+    take = ($signed(rs1) < $signed(rs2));
     BR_GE: 
-    take = (rs1 >= rs2) ? 1:0;
+    take = ($signed(rs1) >= $signed(rs2));
     BR_LTU: 
     take = (rs1<rs2) ? 1:0;
     BR_GEU:

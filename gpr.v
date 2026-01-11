@@ -104,14 +104,14 @@ always @(*) begin //Determines the immediate based on the instruction type
             S_TYPE:
                 immediateFinal = { {52{instruction[31]}}, instruction[31:25], instruction[11:7]};
             B_TYPE:
-                immediateFinal = { {52{instruction[31]}}, instruction[31], instruction[6], instruction[30:25], instruction[11:7]} << 1;
+                immediateFinal = { {51{instruction[31]}}, instruction[31], instruction[7], instruction[30:25], instruction[11:8], 1'b0};
             J_TYPE:
-                immediateFinal = { {44{instruction[31]}}, instruction[31], instruction[19:12], instruction[20], instruction[30:21]} << 1;
+                immediateFinal = { {43{instruction[31]}}, instruction[31], instruction[19:12], instruction[20], instruction[30:21], 1'b0} ;
             U_TYPE_LUI:begin
                 immediateFinal = {{32{instruction[31]}}, instruction[31:12], 12'd0};
             end
             U_TYPE_AUIPC:
-                immediateFinal = {32'd0, instruction[31:12], 12'd0};
+                immediateFinal = {{32{instruction[31]}}, instruction[31:12], 12'd0};
             default:
                 immediateFinal = 64'd0;
         endcase

@@ -1,6 +1,6 @@
 # t.asm
  
-        # Test LUI
+    # Test LUI
     lui x1, 0x12345         # x1 = 0x12345000
 
     # Test AUIPC

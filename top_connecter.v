@@ -13,7 +13,7 @@ wire [31:0]instruction;
 wire [6:0]instructionType;
 wire A_select;
 wire B_select;
-wire [3:0]alu_Operation;
+wire [9:0]alu_Operation;
 wire memory_read_en;
 wire memory_write_en;
 wire reg_write_en;
