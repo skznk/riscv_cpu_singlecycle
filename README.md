@@ -1,4 +1,4 @@
-I will finish this readme by 01/10/2026
+RISC-V CPU Single Cycle
 
 
 
